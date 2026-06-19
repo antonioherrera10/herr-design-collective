@@ -1,0 +1,6 @@
+{
+  "name": "HERR Design Collective",
+  "description": "A new space for life, relationships and business architecture by design. Launching soon.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
