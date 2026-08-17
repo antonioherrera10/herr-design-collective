@@ -1,6 +1,6 @@
 {
   "name": "HERR Design Collective",
-  "description": "A new space for life, relationships and business architecture by design. Launching soon.",
+  "description": "Zurich-based design consultancy working at the intersection of strategy, relationships and design. We make business transformation tangible.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

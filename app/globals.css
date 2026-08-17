@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #0E0D0C;
+  --color-surface-custom: #1A1815;
+  --color-warm-white: #F2EFE9;
+  --color-stone-custom: #6E695E;
+  --color-platinum: #C3C8CE;
+  --color-identity: #C16170;
+  --color-relationships: #A98AC4;
+  --color-work: #E0BB52;
+  --color-spaces: #8FB694;
+  --color-leadership: #7B9AC4;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #0E0D0C;
+  color: #F2EFE9;
+}
+
+body {
+  background-color: #0E0D0C;
+  color: #F2EFE9;
+  font-family: var(--font-sans), "DM Sans", sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #F2EFE9;
+  color: #0E0D0C;
+}
