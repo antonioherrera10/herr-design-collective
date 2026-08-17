@@ -52,6 +52,8 @@ export interface CaseStudy {
 export interface Partner {
   name: string;
   logoId: string;
+  tx?: string;
+  scale?: number;
 }
 
 export interface PlanStep {
@@ -72,12 +74,12 @@ export const CONTENT = {
     partners: [
       { name: "SWISS", logoId: "swiss" },
       { name: "SIX", logoId: "six" },
-      { name: "CSL Behring", logoId: "csl-behring" },
+      { name: "CSL Behring", logoId: "csl-behring", tx: "e_make_transparent:20" },
       { name: "TEDxZurich", logoId: "tedxzurich" },
       { name: "ABB", logoId: "abb" },
       { name: "FIFA", logoId: "fifa" },
       { name: "UNITED NATIONS", logoId: "united-nations" },
-      { name: "ZHdK", logoId: "zhdk" },
+      { name: "ZHdK", logoId: "zhdk", tx: "e_trim", scale: 1.5 },
     ] as Partner[],
   },
 
