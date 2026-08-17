@@ -30,14 +30,8 @@ export function Nav() {
     };
   }, [isOpen]);
 
-  const navLinks = [
-    { label: "Method", href: "/#method" },
-    { label: "Services", href: "/#services" },
-    { label: "Cases", href: "/#cases" },
-    { label: "Collective", href: "/#collective" },
-  ];
-
-  const primaryCta = CONTENT.hero.primaryCta;
+  const navLinks = CONTENT.footer.navigation;
+  const heroCta = CONTENT.hero.cta;
 
   return (
     <>
@@ -64,25 +58,28 @@ export function Nav() {
             aria-label="Main Navigation"
             className="hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.2em] font-medium text-platinum/75"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="hover:text-warm-white transition-colors duration-200 py-1 relative group"
-              >
-                <span>{link.label}</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-warm-white transition-all duration-200 group-hover:w-full" />
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const targetHref = link.href.startsWith("#") ? `/${link.href}` : link.href;
+              return (
+                <Link
+                  key={link.label}
+                  href={targetHref}
+                  className="hover:text-warm-white transition-colors duration-200 py-1 relative group"
+                >
+                  <span>{link.label}</span>
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-warm-white transition-all duration-200 group-hover:w-full" />
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop CTA Button */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href={primaryCta.href}
+              href={heroCta.href}
               className="inline-flex items-center justify-center gap-2 bg-warm-white hover:bg-white text-ink text-xs uppercase tracking-[0.16em] font-semibold px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span>{primaryCta.label}</span>
+              <span>{heroCta.label}</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -129,29 +126,32 @@ export function Nav() {
 
           {/* Navigation Links */}
           <nav className="flex flex-col gap-6 my-auto py-8">
-            {navLinks.map((link, index) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-2xl sm:text-3xl font-light text-warm-white hover:text-platinum transition-colors py-2 flex items-center justify-between border-b border-white/5"
-              >
-                <span>{link.label}</span>
-                <span className="text-xs uppercase tracking-widest text-stone-custom tabular-nums">
-                  0{index + 1}
-                </span>
-              </Link>
-            ))}
+            {navLinks.map((link, index) => {
+              const targetHref = link.href.startsWith("#") ? `/${link.href}` : link.href;
+              return (
+                <Link
+                  key={link.label}
+                  href={targetHref}
+                  onClick={() => setIsOpen(false)}
+                  className="text-2xl sm:text-3xl font-light text-warm-white hover:text-platinum transition-colors py-2 flex items-center justify-between border-b border-white/5"
+                >
+                  <span>{link.label}</span>
+                  <span className="text-xs uppercase tracking-widest text-stone-custom tabular-nums">
+                    0{index + 1}
+                  </span>
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Mobile Footer & CTA */}
           <div className="flex flex-col gap-4 pt-6 border-t border-warm-white/10">
             <a
-              href={primaryCta.href}
+              href={heroCta.href}
               onClick={() => setIsOpen(false)}
               className="w-full inline-flex items-center justify-center gap-2 bg-warm-white text-ink text-sm uppercase tracking-[0.16em] font-semibold py-4 rounded-full transition-all text-center"
             >
-              <span>{primaryCta.label}</span>
+              <span>{heroCta.label}</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
             <div className="text-center text-xs text-stone-custom tracking-wider pt-2">

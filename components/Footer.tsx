@@ -24,7 +24,7 @@ export function Footer() {
               </p>
             </div>
             <div className="text-xs text-stone-custom tracking-wider">
-              Zurich · Global Outlook
+              {footer.contact.location} · Global Outlook
             </div>
           </div>
 
@@ -34,16 +34,19 @@ export function Footer() {
               Navigation
             </h4>
             <ul className="flex flex-col gap-3 text-sm text-platinum/80">
-              {footer.navigation.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="hover:text-warm-white transition-colors duration-200 inline-flex items-center gap-1 group"
-                  >
-                    <span>{item.label}</span>
-                  </Link>
-                </li>
-              ))}
+              {footer.navigation.map((item) => {
+                const targetHref = item.href.startsWith("#") ? `/${item.href}` : item.href;
+                return (
+                  <li key={item.label}>
+                    <Link
+                      href={targetHref}
+                      className="hover:text-warm-white transition-colors duration-200 inline-flex items-center gap-1 group"
+                    >
+                      <span>{item.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -53,7 +56,7 @@ export function Footer() {
               Pages
             </h4>
             <ul className="flex flex-col gap-3 text-sm text-platinum/80">
-              {footer.legal.map((item) => (
+              {footer.pages.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
@@ -108,7 +111,7 @@ export function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-custom">
           <div>{footer.copyright}</div>
           <div className="flex items-center gap-4">
-            <span>Zurich, Switzerland</span>
+            <span>{footer.contact.location}</span>
           </div>
         </div>
       </div>
