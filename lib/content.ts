@@ -38,6 +38,7 @@ export interface MethodDimension {
 export interface MethodStep {
   name: string;
   description: string;
+  layers?: readonly string[];
   /** Only the PRISM step carries the five dimensions (spectrum bar markers). */
   dimensions?: readonly MethodDimension[];
 }
@@ -72,7 +73,7 @@ export const CONTENT = {
   hero: {
     headline: "Moving people, brands and organisations forward.",
     subline:
-      "We design the structures and relationships that make business transformation tangible.",
+      "We build the relationships and design the structures that make business transformation tangible.",
     cta: bookCta("Conversation with HERR Design Collective"),
   },
 
@@ -101,7 +102,7 @@ export const CONTENT = {
   },
 
   proofStrip: {
-    body: "Our work has supported the growth of individuals, aligned teams and reshaped brand experiences that move more organisations forward. HERR Design Collective works at that intersection: research-led, relationship-driven, design-executed.",
+    body: "Our work has supported the growth of individuals, aligned teams and reshaped brand experiences that move organisations forward. HERR Design Collective works at the intersection of relationships, creativity, strategy, communication and design execution.",
     transition: "See how, below.",
   },
 
@@ -113,9 +114,9 @@ export const CONTENT = {
   },
 
   valueProposition: {
-    headline: "The human architecture behind lasting change.",
+    headline: "Discover how we make transformation tangible",
     subheadline:
-      "We design the relationship architecture that makes people flourish. A practice built on connection, creativity and the methods to make change feel human.",
+      "We design the relationship architecture that makes people flourish.",
     pillars: [
       {
         name: "Connecting the Dots",
@@ -151,13 +152,16 @@ export const CONTENT = {
   },
 
   guide: {
-    subLabel: "Your Creative Business Partner",
-    labels: ["Relationship Architect", "Designer", "Mentor"],
-    heading: "Antonio believes everyone can design and build their own vision.",
-    body: "He partners with executives, entrepreneurs and high-profile individuals to create, raise and communicate value, transforming potential into felt, tangible results.",
+    subLabel: "Relationship Architect · Designer · Mentor",
+    heading: "Antonio built his own transformation architecture for more than 8 years. He is certain that everyone can design and build their own.",
+    body: "Partnering with executives, entrepreneurs and high-profile individuals that want create, raise and communicate value that comes from transforming human potential into business results.",
     cta: {
       label: "Meet Antonio Herrera",
       href: "mailto:antonio.herrera@herrdesigncollective.com?subject=Meet%20Antonio%20Herrera",
+    } as Cta,
+    secondaryCta: {
+      label: "Connect on LinkedIn",
+      href: "https://www.linkedin.com/in/antonioherreragd/",
     } as Cta,
     portraitId: "herr-antonio-herrera",
   },
@@ -201,7 +205,8 @@ export const CONTENT = {
   ] as Testimonial[],
 
   services: {
-    headline: "Ways to work together.",
+    sectionName: "Creative Business Design Services",
+    headline: "Explore how we can work together",
     groups: [
       {
         title: "Consulting & Facilitation",
@@ -222,12 +227,33 @@ export const CONTENT = {
           "Executive mentoring, lectures and programmes in Creative Business Design, design thinking and creative strategy.",
       },
     ] as ServiceGroup[],
+    individualServices: {
+      heading: "Individual Services",
+      items: [
+        {
+          title: "1:1 Partnership",
+          description:
+            "We leverage your insights, profile and background into unique qualities to provide you with highly personalised guidance, genuine encouragement, and tailored resources that empower you to reach your absolute best.",
+        },
+        {
+          title: "People Focus",
+          description:
+            "We act as dynamic conductors for your advisors, peers or teams, combining infectious optimism while naturally aligning each member's unique strengths and flexibly coordinating resources to drive highly efficient, productive results.",
+        },
+        {
+          title: "Business Focus",
+          description:
+            "We connect your business network, sharing valuable insights and experiences while fostering an optimistic, unified environment that helps everyone see how their contributions fit into a meaningful, larger purpose.",
+        },
+      ],
+      cta: bookCta("Individual Services Inquiry"),
+    },
   },
 
   method: {
-    headline: "A methodology built on empathy, structure and design.",
+    headline: "Curated and proprietary methodology to structure lasting change.",
     intro:
-      "Creative Business Design is the discipline behind everything HERR Design Collective delivers: a layered process moving from deep understanding to strategic execution.",
+      "Creative Business Design is the framework behind HERR Design Collective, delivering a layered process moving from deep human understanding to strategic execution.",
     steps: [
       {
         name: "Research.",
@@ -242,12 +268,13 @@ export const CONTENT = {
       {
         name: "KOMPATH Method.",
         description:
-          "Rooted in empathy-led communication and work process design, a method for relationship building, productivity and agile collaboration across five layers.",
+          "Proprietary framework rooted in empathy-led communication and work process design, a method for relationship building, productivity and agile collaboration across five layers.",
+        layers: ["Awareness", "Values", "Empathy", "Communication", "Action"],
       },
       {
         name: "PRISM Method.",
         description:
-          "Proprietary framework for aligning people and strategic direction across professional identity, relationships, work, spaces and leadership.",
+          "Proprietary framework for aligning and integrating an individual or business vision among core personal and professional dimensions, focusing on people and strategic direction.",
         dimensions: [
           { name: "Identity", color: "#C16170" },
           { name: "Relationships", color: "#A98AC4" },

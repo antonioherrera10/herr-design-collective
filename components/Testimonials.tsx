@@ -107,7 +107,7 @@ export function Testimonials() {
         backgroundColor: currentTheme.background,
         transition: "background-color 1000ms cubic-bezier(0.4, 0, 0.2, 1)",
       }}
-      className="w-full relative overflow-hidden border-y border-warm-white/5 py-24 sm:py-28 md:py-32 px-6 sm:px-8"
+      className="w-full relative overflow-hidden border-y border-warm-white/5 py-14 sm:py-16 md:py-20 px-6 sm:px-8"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
@@ -126,23 +126,23 @@ export function Testimonials() {
         ref={containerRef}
         tabIndex={0}
         onKeyDown={handleKeyDown}
-        className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center focus:outline-none focus-visible:ring-1 focus-visible:ring-warm-white/30 rounded-2xl p-2"
+        className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center focus:outline-none focus-visible:ring-1 focus-visible:ring-warm-white/30 rounded-2xl p-2"
         role="region"
         aria-roledescription="carousel"
       >
         {/* Quote Container: CSS Grid stack to reserve max height naturally and prevent layout jumps */}
-        <div className="w-full grid grid-cols-1 grid-rows-1 items-center justify-items-center mb-10 sm:mb-12">
+        <div className="w-full grid grid-cols-1 grid-rows-1 items-center justify-items-center mb-7 sm:mb-8">
           {/* Ghost items in the same grid cell to guarantee the container always holds the maximum quote height */}
           {testimonials.map((item, idx) => (
             <div
               key={`ghost-${idx}`}
               aria-hidden="true"
-              className="col-start-1 row-start-1 w-full max-w-[58ch] flex flex-col items-center text-center opacity-0 pointer-events-none select-none invisible"
+              className="col-start-1 row-start-1 w-full max-w-[74ch] flex flex-col items-center text-center opacity-0 pointer-events-none select-none invisible"
             >
-              <blockquote className="text-[clamp(18px,2vw,24px)] font-normal text-warm-white leading-relaxed">
+              <blockquote className="text-[clamp(17px,1.85vw,22px)] font-normal text-warm-white leading-relaxed">
                 “{item.quote}”
               </blockquote>
-              <cite className="mt-5 sm:mt-6 text-sm font-normal text-stone-custom not-italic">
+              <cite className="mt-4 sm:mt-5 text-sm font-normal text-stone-custom not-italic">
                 — {item.attribution}
               </cite>
             </div>
@@ -150,7 +150,7 @@ export function Testimonials() {
 
           {/* Active Visible Item with soft crossfade */}
           <div
-            className="col-start-1 row-start-1 w-full max-w-[58ch] flex flex-col items-center text-center"
+            className="col-start-1 row-start-1 w-full max-w-[74ch] flex flex-col items-center text-center"
             aria-live="polite"
             aria-atomic="true"
           >
@@ -166,10 +166,10 @@ export function Testimonials() {
                 }}
                 className="w-full flex flex-col items-center text-center"
               >
-                <blockquote className="text-[clamp(18px,2vw,24px)] font-normal text-warm-white leading-relaxed tracking-tight">
+                <blockquote className="text-[clamp(17px,1.85vw,22px)] font-normal text-warm-white leading-relaxed tracking-tight">
                   “{testimonials[currentIndex].quote}”
                 </blockquote>
-                <cite className="mt-5 sm:mt-6 text-sm font-normal text-stone-custom not-italic tracking-normal">
+                <cite className="mt-4 sm:mt-5 text-sm font-normal text-stone-custom not-italic tracking-normal">
                   — {testimonials[currentIndex].attribution}
                 </cite>
               </motion.div>

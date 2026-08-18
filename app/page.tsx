@@ -67,7 +67,7 @@ export default function HomePage() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-platinum" />
             </span>
             <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-platinum">
-              Zurich · Creative Business Design
+              Design Consultancy
             </span>
           </div>
 

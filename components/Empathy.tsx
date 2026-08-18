@@ -31,18 +31,28 @@ export function Empathy() {
           sizes="100vw"
         />
 
-        {/* Subtle Gradient Overlays for Atmospheric Cohesion */}
+        {/* Subtle Gradient Overlays for Atmospheric Cohesion & Contrast */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-surface-custom/90 pointer-events-none"
+          className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-surface-custom/90 pointer-events-none"
         />
         <div
           aria-hidden="true"
           className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.4)] pointer-events-none"
         />
+
+        {/* Centered Headline & Subline Overlay */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold sm:font-bold text-warm-white tracking-tight leading-tight max-w-2xl drop-shadow-lg">
+            Build what resonates with your people.
+          </h2>
+          <p className="mt-2.5 sm:mt-3.5 text-base sm:text-lg md:text-xl font-light text-warm-white/85 tracking-normal leading-relaxed max-w-lg drop-shadow">
+            Start with the man in the mirror.
+          </p>
+        </div>
       </motion.div>
 
-      {/* 2. Text Content: Quote & Statement */}
+      {/* 2. Text Content: Statement then Quote */}
       <div className="w-full max-w-4xl mx-auto px-6 sm:px-8 py-20 sm:py-24 md:py-28">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
@@ -51,21 +61,21 @@ export function Empathy() {
           transition={{ duration: 0.65, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          {/* Quote Block as Centerpiece */}
-          <div className="flex flex-col items-center text-center max-w-[32ch]">
-            <blockquote className="text-[clamp(24px,3vw,34px)] font-normal italic text-warm-white tracking-tight leading-[1.25]">
-              “{empathy.quote}”
-            </blockquote>
-            <cite className="mt-3 sm:mt-4 text-sm font-normal text-stone-custom not-italic tracking-normal">
-              — {empathy.attribution}
-            </cite>
-          </div>
-
-          {/* Statement Block: Our voice answering the quote */}
-          <div className="mt-12 sm:mt-14 md:mt-16 w-full max-w-[62ch] mx-auto text-left">
+          {/* Statement Block */}
+          <div className="w-full max-w-[65ch] mx-auto text-left">
             <p className="text-[17px] sm:text-[19px] font-light text-warm-white/75 leading-relaxed">
               {empathy.statement}
             </p>
+          </div>
+
+          {/* Quote Block positioned after the paragraph, in one line */}
+          <div className="mt-12 sm:mt-14 w-full flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-center">
+            <blockquote className="text-[clamp(18px,2.2vw,24px)] font-normal italic text-warm-white tracking-tight leading-snug whitespace-normal sm:whitespace-nowrap">
+              “{empathy.quote}”
+            </blockquote>
+            <cite className="text-sm font-normal text-stone-custom not-italic tracking-normal whitespace-nowrap">
+              — {empathy.attribution}
+            </cite>
           </div>
         </motion.div>
       </div>

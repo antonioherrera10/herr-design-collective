@@ -84,69 +84,54 @@ function StepItem({
           {step.description}
         </p>
 
-        {/* PRISM Spectrum Bar */}
+        {/* Five Layers list if defined (e.g. KOMPATH Method) */}
+        {step.layers && step.layers.length > 0 && (
+          <ul className="mt-4 flex flex-wrap items-center gap-2 sm:gap-2.5">
+            {step.layers.map((layer) => (
+              <li
+                key={layer}
+                className="text-[11px] sm:text-[12px] uppercase tracking-[0.14em] font-medium text-warm-white bg-warm-white/[0.04] border border-warm-white/10 px-3 py-1 rounded-full"
+              >
+                {layer}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* PRISM Dimensions Badges (Identity, Relationships, Work, Spaces, Leadership) */}
         {isPrismStep && step.dimensions && (
-          <div className="mt-6 w-full max-w-[320px] flex flex-col gap-2.5">
-            {/* 5-segment Spectrum Bar (~240px wide, 4px tall) */}
-            <div
-              className="w-[240px] max-w-full h-1 flex rounded-full overflow-hidden p-0 gap-[2px] bg-ink/40"
-              role="group"
-              aria-label="PRISM Method five dimensions"
-            >
+          <div className="mt-4 flex flex-col gap-3 w-full">
+            <ul className="flex flex-wrap items-center gap-2 sm:gap-2.5">
               {step.dimensions.map((dim, dimIdx) => {
                 const isHovered = hoveredDimension === dimIdx;
                 return (
-                  <button
-                    key={dim.name}
-                    type="button"
-                    onMouseEnter={() => setHoveredDimension(dimIdx)}
-                    onMouseLeave={() => setHoveredDimension(null)}
-                    onFocus={() => setHoveredDimension(dimIdx)}
-                    onBlur={() => setHoveredDimension(null)}
-                    className="flex-1 h-full cursor-pointer focus:outline-none transition-all duration-200"
-                    style={{
-                      backgroundColor: dim.color,
-                      transform: isHovered ? "scaleY(1.75)" : "scaleY(1)",
-                      transformOrigin: "center",
-                    }}
-                    aria-label={`${dim.name} dimension`}
-                  />
+                  <li key={dim.name}>
+                    <button
+                      type="button"
+                      onMouseEnter={() => setHoveredDimension(dimIdx)}
+                      onMouseLeave={() => setHoveredDimension(null)}
+                      onFocus={() => setHoveredDimension(dimIdx)}
+                      onBlur={() => setHoveredDimension(null)}
+                      className={`inline-flex items-center gap-1.5 text-[11px] sm:text-[12px] uppercase tracking-[0.14em] font-medium px-3 py-1 rounded-full border transition-all duration-200 cursor-pointer focus:outline-none ${
+                        isHovered
+                          ? "bg-warm-white/10 border-warm-white/40 text-warm-white scale-[1.03]"
+                          : "bg-warm-white/[0.04] border-warm-white/10 text-warm-white hover:border-warm-white/25"
+                      }`}
+                    >
+                      <span
+                        className="w-1.5 h-1.5 rounded-full transition-transform duration-200"
+                        style={{
+                          backgroundColor: dim.color,
+                          transform: isHovered ? "scale(1.3)" : "scale(1)",
+                        }}
+                        aria-hidden="true"
+                      />
+                      <span>{dim.name}</span>
+                    </button>
+                  </li>
                 );
               })}
-            </div>
-
-            {/* Dynamic Label beneath the bar (Desktop Hover / Focus) */}
-            <div className="hidden sm:block min-h-[18px]">
-              {hoveredDimension !== null && step.dimensions[hoveredDimension] ? (
-                <motion.span
-                  key={hoveredDimension}
-                  initial={{ opacity: 0, y: -2 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.15 }}
-                  className="text-[11px] font-normal tracking-[0.25em] uppercase block"
-                  style={{ color: step.dimensions[hoveredDimension].color }}
-                >
-                  {step.dimensions[hoveredDimension].name}
-                </motion.span>
-              ) : (
-                <span className="text-[11px] font-normal tracking-[0.25em] uppercase text-stone-custom block">
-                  five dimensions
-                </span>
-              )}
-            </div>
-
-            {/* Static Dimensions list for Touch/Mobile screens */}
-            <div className="sm:hidden flex flex-wrap gap-2 mt-1.5">
-              {step.dimensions.map((dim) => (
-                <span
-                  key={dim.name}
-                  className="text-[10px] uppercase tracking-[0.2em] font-medium px-2 py-0.5 rounded-full border border-warm-white/[0.08]"
-                  style={{ color: dim.color }}
-                >
-                  {dim.name}
-                </span>
-              ))}
-            </div>
+            </ul>
           </div>
         )}
       </div>

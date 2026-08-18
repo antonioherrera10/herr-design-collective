@@ -30,7 +30,7 @@ export function Stakes() {
           {/* Subtle Category Identifier Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-warm-white/[0.04] border border-warm-white/10 w-fit">
             <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-platinum">
-              The Stakes · Transformation Layer
+              Transformation by Design
             </span>
           </div>
 
