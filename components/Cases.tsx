@@ -25,7 +25,7 @@ function CaseCard({
         delay: shouldReduceMotion ? 0 : (index % 5) * 0.08,
         ease: "easeOut",
       }}
-      className="w-[320px] sm:w-[380px] md:w-[420px] max-w-[85vw] flex-shrink-0 snap-start bg-warm-white/[0.03] border border-warm-white/[0.08] hover:border-warm-white/20 rounded-[16px] p-6 sm:p-7 flex flex-col justify-between transition-colors duration-200 group select-none"
+      className="w-full md:w-[420px] md:flex-shrink-0 md:snap-start bg-warm-white/[0.03] border border-warm-white/[0.08] hover:border-warm-white/20 rounded-[16px] p-6 sm:p-7 flex flex-col justify-between transition-colors duration-200 group"
     >
       {/* Top Section: Media + Title + Description */}
       <div className="flex flex-col gap-5">
@@ -184,8 +184,8 @@ export function Cases() {
             {cases.headline}
           </motion.h2>
 
-          {/* Endless Slider Controls (Prev / Next Chevrons, Always active and looping) */}
-          <div className="flex items-center gap-3">
+          {/* Endless Slider Controls on md+ */}
+          <div className="hidden md:flex items-center gap-3">
             <button
               type="button"
               onClick={() => scroll("left")}
@@ -206,16 +206,11 @@ export function Cases() {
           </div>
         </div>
 
-        {/* Horizontal Snap Endless Slider */}
-        <div
-          ref={sliderRef}
-          tabIndex={0}
-          aria-label="Selected case studies slider (endless scroll)"
-          className="w-full flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 px-6 sm:px-8 xl:px-[calc((100vw-72rem)/2+2rem)] focus:outline-none scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-        >
-          {infiniteEntries.map((caseItem, index) => (
+        {/* Mobile View: Clean, static vertical stack (natural page scroll, 0 horizontal jank) */}
+        <div className="flex md:hidden flex-col gap-6 px-6 sm:px-8">
+          {cases.entries.map((caseItem, index) => (
             <CaseCard
-              key={`${caseItem.title}-${index}`}
+              key={`mobile-${caseItem.title}-${index}`}
               caseItem={caseItem}
               index={index}
               shouldReduceMotion={shouldReduceMotion}
@@ -223,9 +218,26 @@ export function Cases() {
           ))}
         </div>
 
-        {/* Footnote Below the Slider */}
-        <div className="w-full max-w-6xl mx-auto px-6 sm:px-8">
-          <p className="text-[13px] sm:text-[14px] font-normal italic text-stone-custom max-w-[70ch] leading-relaxed">
+        {/* Desktop View (md+): Smooth horizontal endless loop slider */}
+        <div
+          ref={sliderRef}
+          tabIndex={0}
+          aria-label="Selected case studies slider"
+          className="hidden md:flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 px-6 sm:px-8 xl:px-[calc((100vw-72rem)/2+2rem)] focus:outline-none scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        >
+          {infiniteEntries.map((caseItem, index) => (
+            <CaseCard
+              key={`desktop-${caseItem.title}-${index}`}
+              caseItem={caseItem}
+              index={index}
+              shouldReduceMotion={shouldReduceMotion}
+            />
+          ))}
+        </div>
+
+        {/* Footnote Below the Slider (Centered to page) */}
+        <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 flex justify-center">
+          <p className="text-[13px] sm:text-[14px] font-normal italic text-stone-custom max-w-[70ch] leading-relaxed text-center">
             {cases.footnote}
           </p>
         </div>

@@ -1,12 +1,35 @@
 "use client";
 
+import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { CONTENT } from "@/lib/content";
 
+const STEP_COLORS = [
+  {
+    ring: "#C16170",
+    bg: "rgba(193, 97, 112, 0.14)",
+    glow: "rgba(193, 97, 112, 0.25)",
+    activeBorder: "#C16170",
+  },
+  {
+    ring: "#E0BB52",
+    bg: "rgba(224, 187, 82, 0.14)",
+    glow: "rgba(224, 187, 82, 0.25)",
+    activeBorder: "#E0BB52",
+  },
+  {
+    ring: "#8FB694",
+    bg: "rgba(143, 182, 148, 0.14)",
+    glow: "rgba(143, 182, 148, 0.25)",
+    activeBorder: "#8FB694",
+  },
+];
+
 export function Plan() {
   const { plan } = CONTENT;
   const shouldReduceMotion = useReducedMotion();
+  const [activeStep, setActiveStep] = useState<number>(0);
 
   return (
     <section
@@ -34,46 +57,111 @@ export function Plan() {
           </p>
         </motion.div>
 
-        {/* The Three Steps: Open Layout with Horizontal Connector Line on Desktop */}
+        {/* The Three Steps: Guided interactive progress 1 -> 2 -> 3 with connecting line */}
         <div className="w-full relative mb-16 sm:mb-20 md:mb-24">
-          {/* Desktop Horizontal Connector Line behind numerals */}
+          {/* Desktop Horizontal Connector Line behind numerals with dynamic progress fill */}
           <div
             aria-hidden="true"
-            className="hidden min-[900px]:block absolute top-[28px] left-[10%] right-[10%] h-[1px] bg-warm-white/[0.08] z-0"
-          />
+            className="hidden min-[900px]:block absolute top-[28px] left-[15%] right-[15%] h-[2px] bg-warm-white/[0.08] z-0 overflow-hidden"
+          >
+            <motion.div
+              className="h-full bg-gradient-to-r from-[#C16170] via-[#E0BB52] to-[#8FB694]"
+              initial={false}
+              animate={{
+                width:
+                  activeStep === 0 ? "20%" : activeStep === 1 ? "60%" : "100%",
+              }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            />
+          </div>
 
-          <div className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-12 min-[900px]:gap-10 relative z-10">
-            {plan.steps.map((step, idx) => (
-              <motion.div
-                key={step.title}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-                whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{
-                  duration: 0.55,
-                  delay: shouldReduceMotion ? 0 : idx * 0.12,
-                  ease: "easeOut",
-                }}
-                className="flex flex-col items-start text-left"
-              >
-                {/* Large Step Numeral: DM Sans 300, clamp(40px, 5vw, 64px), platinum 40%, tabular-nums */}
-                <div className="relative inline-block mb-4 sm:mb-6 pr-4 bg-ink">
-                  <span className="text-[clamp(40px,5vw,64px)] font-light text-platinum/40 tabular-nums leading-none select-none">
-                    {idx + 1}
-                  </span>
-                </div>
+          <div className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-10 min-[900px]:gap-8 relative z-10">
+            {plan.steps.map((step, idx) => {
+              const colors = STEP_COLORS[idx % STEP_COLORS.length];
+              const isSelected = activeStep === idx;
+              const isPast = activeStep > idx;
 
-                {/* Step Title: DM Sans 500, 19-21px, warm-white */}
-                <h3 className="text-[19px] sm:text-[20px] md:text-[21px] font-medium text-warm-white leading-snug tracking-tight mb-3">
-                  {step.title}
-                </h3>
+              return (
+                <motion.div
+                  key={step.title}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{
+                    duration: 0.55,
+                    delay: shouldReduceMotion ? 0 : idx * 0.12,
+                    ease: "easeOut",
+                  }}
+                  onMouseEnter={() => setActiveStep(idx)}
+                  onClick={() => setActiveStep(idx)}
+                  className={`flex flex-col items-start text-left cursor-pointer p-5 sm:p-6 rounded-[20px] transition-all duration-300 ${
+                    isSelected
+                      ? "bg-warm-white/[0.04] border border-warm-white/20 shadow-xl backdrop-blur-xs"
+                      : "bg-transparent border border-transparent hover:bg-warm-white/[0.02]"
+                  }`}
+                >
+                  {/* Interactive Colour Circle with Step Numeral */}
+                  <div className="relative inline-flex items-center justify-center mb-5">
+                    {/* Pulsing ring on active */}
+                    {isSelected && (
+                      <motion.div
+                        layoutId="activePlanRing"
+                        className="absolute inset-[-6px] rounded-full border border-dashed opacity-60"
+                        style={{ borderColor: colors.ring }}
+                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                      />
+                    )}
 
-                {/* Step Description: DM Sans 300/400, 15-16px, warm-white 70%, max-w ~34ch */}
-                <p className="text-[15px] sm:text-[16px] font-light text-warm-white/70 leading-relaxed max-w-[34ch]">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
+                    <div
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 transition-all duration-300"
+                      style={{
+                        borderColor: isSelected || isPast ? colors.ring : "rgba(245, 243, 238, 0.16)",
+                        backgroundColor: isSelected ? colors.bg : isPast ? "rgba(245, 243, 238, 0.04)" : "rgba(10, 10, 10, 0.8)",
+                        boxShadow: isSelected ? `0 0 24px ${colors.glow}` : "none",
+                      }}
+                    >
+                      <span
+                        className="text-[20px] sm:text-[22px] font-semibold tabular-nums leading-none transition-colors duration-200"
+                        style={{
+                          color: isSelected || isPast ? colors.ring : "rgba(245, 243, 238, 0.5)",
+                        }}
+                      >
+                        {idx + 1}
+                      </span>
+                    </div>
+
+                    {/* Step indicator badge */}
+                    <span className="sr-only">Step {idx + 1}</span>
+                  </div>
+
+                  {/* Step Title: DM Sans 500, 19-21px, warm-white */}
+                  <h3
+                    className={`text-[19px] sm:text-[20px] md:text-[21px] font-medium leading-snug tracking-tight mb-2.5 transition-colors duration-200 ${
+                      isSelected ? "text-warm-white" : "text-warm-white/90"
+                    }`}
+                  >
+                    {step.title}
+                  </h3>
+
+                  {/* Step Description */}
+                  <p className="text-[15px] sm:text-[16px] font-light text-warm-white/70 leading-relaxed max-w-[34ch]">
+                    {step.description}
+                  </p>
+
+                  {/* Active Step Progress Pill indicator */}
+                  <div className="mt-4 flex items-center gap-1.5 min-h-[18px]">
+                    <span
+                      className={`text-[10px] uppercase tracking-[0.2em] font-medium transition-opacity duration-200 ${
+                        isSelected ? "opacity-100" : "opacity-40"
+                      }`}
+                      style={{ color: colors.ring }}
+                    >
+                      {idx === 0 ? "Initial Contact" : idx === 1 ? "Custom Scope" : "Co-Creation"}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 

@@ -10,6 +10,16 @@ import {
 } from "motion/react";
 import { CONTENT, MethodStep } from "@/lib/content";
 
+// Step color spectrum mapping for the reading guide
+const STEP_HUE_COLORS = [
+  { color: "#C16170", glow: "rgba(193, 97, 112, 0.6)", label: "Step 1" }, // Rose / Identity
+  { color: "#A98AC4", glow: "rgba(169, 138, 196, 0.6)", label: "Step 2" }, // Lilac / Relationships
+  { color: "#E0BB52", glow: "rgba(224, 187, 82, 0.6)", label: "Step 3" }, // Amber / Work
+  { color: "#8FB694", glow: "rgba(143, 182, 148, 0.6)", label: "Step 4" }, // Sage / Spaces
+  { color: "#7B9AC4", glow: "rgba(123, 154, 196, 0.6)", label: "Step 5" }, // Slate Blue / Leadership
+  { color: "#C16170", glow: "rgba(193, 97, 112, 0.6)", label: "Step 6" },
+];
+
 function StepItem({
   step,
   index,
@@ -24,12 +34,20 @@ function StepItem({
   const itemRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(itemRef, {
     once: false,
-    margin: "-20% 0px -20% 0px",
+    margin: "-25% 0px -25% 0px",
   });
   const [hoveredDimension, setHoveredDimension] = useState<number | null>(null);
+  const [isNodeHovered, setIsNodeHovered] = useState(false);
 
   const isPrismStep = Boolean(step.dimensions && step.dimensions.length > 0);
   const isNodeActive = shouldReduceMotion || isInView;
+  
+  // Pick hue color based on index
+  const hue = STEP_HUE_COLORS[index % STEP_HUE_COLORS.length];
+
+  const scrollToStep = () => {
+    itemRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
 
   return (
     <motion.div
@@ -44,32 +62,43 @@ function StepItem({
       }}
       className="relative pl-8 sm:pl-10 md:pl-12 group"
     >
-      {/* Node on Spine (Centered at left-0 on mobile, left-3/left-4 on sm/md) */}
+      {/* Interactive Node on Spine */}
       <div className="absolute left-0 top-1.5 -translate-x-1/2 flex items-center justify-center">
-        {isPrismStep ? (
-          /* PRISM Step Conic Ring Node */
-          <div className="relative flex items-center justify-center">
-            <div
-              className="w-3.5 h-3.5 rounded-full transition-all duration-300 shadow-md"
-              style={{
-                background:
-                  "conic-gradient(#C16170, #A98AC4, #E0BB52, #8FB694, #7B9AC4, #C16170)",
-                opacity: isNodeActive ? 1 : 0.4,
-                transform: isNodeActive ? "scale(1.2)" : "scale(0.9)",
-              }}
+        <button
+          type="button"
+          onClick={scrollToStep}
+          onMouseEnter={() => setIsNodeHovered(true)}
+          onMouseLeave={() => setIsNodeHovered(false)}
+          onFocus={() => setIsNodeHovered(true)}
+          onBlur={() => setIsNodeHovered(false)}
+          aria-label={`Jump to ${step.name}`}
+          className="relative flex items-center justify-center p-2 -m-2 cursor-pointer focus:outline-none group/node"
+        >
+          {/* Subtle Ambient Pulse Ring when Active or Hovered */}
+          {(isNodeActive || isNodeHovered) && (
+            <span
+              className="absolute w-5 h-5 rounded-full animate-ping opacity-30 pointer-events-none"
+              style={{ backgroundColor: hue.color }}
             />
-            <div className="absolute w-1.5 h-1.5 rounded-full bg-surface-custom" />
-          </div>
-        ) : (
-          /* Standard 8px Platinum Node */
-          <div
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              isNodeActive
-                ? "bg-warm-white scale-110 shadow-[0_0_8px_rgba(242,239,233,0.5)]"
-                : "bg-platinum/40 scale-90"
-            }`}
+          )}
+
+          {/* Core Interactive Hue Dot */}
+          <span
+            className="w-2.5 h-2.5 rounded-full transition-all duration-300 transform"
+            style={{
+              backgroundColor: isNodeActive || isNodeHovered ? hue.color : "rgba(235, 230, 224, 0.4)",
+              transform: isNodeHovered
+                ? "scale(1.5)"
+                : isNodeActive
+                ? "scale(1.2)"
+                : "scale(0.9)",
+              boxShadow:
+                isNodeActive || isNodeHovered
+                  ? `0 0 10px ${hue.glow}, 0 0 3px ${hue.color}`
+                  : "none",
+            }}
           />
-        )}
+        </button>
       </div>
 
       {/* Content: Name, Description, PRISM Spectrum Moment */}
@@ -156,10 +185,27 @@ export function Method() {
     <section
       id="method"
       aria-labelledby="method-headline"
-      className="w-full bg-surface-custom border-t border-warm-white/[0.06] py-24 sm:py-28 md:py-32 px-6 sm:px-8 relative overflow-hidden"
+      className="w-full bg-surface-custom py-24 sm:py-28 md:py-32 px-6 sm:px-8 relative overflow-hidden"
     >
+      {/* Top Full-Width Horizontal PRISM Colour Stripe with Smooth Draw-In */}
+      <div className="absolute top-0 left-0 right-0 h-[2.5px] w-full overflow-hidden pointer-events-none">
+        <motion.div
+          initial={shouldReduceMotion ? false : { scaleX: 0, opacity: 0 }}
+          whileInView={shouldReduceMotion ? undefined : { scaleX: 1, opacity: 1 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.85, ease: "easeOut" }}
+          style={{
+            transformOrigin: "left center",
+            background:
+              "linear-gradient(90deg, #C16170 0%, #A98AC4 25%, #E0BB52 50%, #8FB694 75%, #7B9AC4 100%)",
+          }}
+          aria-hidden="true"
+          className="w-full h-full"
+        />
+      </div>
+
       <div className="w-full max-w-4xl mx-auto flex flex-col gap-16 sm:gap-20">
-        {/* Header Block Centered: H2 Headline + Intro Subtitle */}
+        {/* Header Block Centered: Section Title Eyebrow + Visual Accent + H2 Headline + Intro Subtitle */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
@@ -167,6 +213,14 @@ export function Method() {
           transition={{ duration: 0.65, ease: "easeOut" }}
           className="flex flex-col items-center text-center"
         >
+          {/* Visual Accent + Section Title */}
+          <div className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-warm-white/[0.04] border border-warm-white/10 mb-6">
+            <span className="w-2 h-2 rounded-full bg-gradient-to-tr from-[#C16170] via-[#E0BB52] to-[#8FB694] animate-pulse" />
+            <span className="text-[11px] sm:text-[12px] font-medium uppercase tracking-[0.22em] text-warm-white/90">
+              Our Method
+            </span>
+          </div>
+
           {/* H2 Headline: clamp(30-44px), DM Sans 600, warm-white, sentence case, max-w ~26ch */}
           <h2
             id="method-headline"

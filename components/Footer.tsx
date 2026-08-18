@@ -8,9 +8,9 @@ export function Footer() {
   return (
     <footer className="w-full bg-surface-custom border-t border-warm-white/10 text-warm-white transition-colors">
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-12 pb-16 border-b border-warm-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 pb-16 border-b border-warm-white/10">
           {/* Brand Column */}
-          <div className="lg:col-span-2 flex flex-col justify-between">
+          <div className="lg:col-span-2 flex flex-col justify-start">
             <div>
               <Link
                 href="/"
@@ -23,13 +23,10 @@ export function Footer() {
                   className="h-5 sm:h-6 w-auto object-contain"
                 />
               </Link>
-              <p className="text-sm text-platinum/70 max-w-sm leading-relaxed mb-6 font-light">
+              <p className="text-sm text-platinum/70 max-w-sm leading-relaxed mb-4 font-light">
                 Creative business design consultancy working at the intersection
-                of strategy, relationships and design in Zurich, Switzerland.
+                of strategy, relationships and design.
               </p>
-            </div>
-            <div className="text-xs text-stone-custom tracking-wider">
-              {footer.contact.location} · Global Outlook
             </div>
           </div>
 
@@ -55,48 +52,38 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Pages / Legal Column */}
-          <div className="flex flex-col">
-            <h4 className="text-xs uppercase tracking-[0.2em] text-stone-custom font-semibold mb-5">
-              Pages
-            </h4>
-            <ul className="flex flex-col gap-3 text-sm text-platinum/80">
-              {footer.pages.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="hover:text-warm-white transition-colors duration-200"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Contact & Social Column */}
-          <div className="flex flex-col">
+          <div className="flex flex-col items-start text-left">
             <h4 className="text-xs uppercase tracking-[0.2em] text-stone-custom font-semibold mb-5">
-              Contact & Social
+              Contact
             </h4>
-            <div className="flex flex-col gap-3 text-sm text-platinum/80 mb-6">
+            
+            {/* Plain Email Link & Info with uniform font size */}
+            <div className="flex flex-col gap-3 mb-6 items-start text-left">
               <a
                 href={`mailto:${footer.contact.email}`}
-                className="hover:text-warm-white transition-colors break-all"
+                className="text-sm text-platinum/85 hover:text-warm-white transition-colors break-all text-left"
               >
                 {footer.contact.email}
               </a>
-              <span className="text-stone-custom text-xs">
-                {footer.contact.location}
-              </span>
+
+              {/* Address and UID */}
+              <div className="flex flex-col gap-1.5 text-sm text-platinum/80 font-light items-start text-left">
+                <span className="leading-relaxed">
+                  <strong className="font-normal text-stone-custom">Address:</strong> {footer.contact.address}
+                </span>
+                <span>
+                  <strong className="font-normal text-stone-custom">UID:</strong> {footer.contact.uid}
+                </span>
+              </div>
             </div>
 
             <h4 className="text-xs uppercase tracking-[0.2em] text-stone-custom font-semibold mb-3">
               Social
             </h4>
-            <ul className="flex flex-col gap-2 text-sm text-platinum/80">
+            <ul className="flex flex-col gap-2.5 text-sm text-platinum/80 items-start text-left">
               {footer.social.map((item) => (
-                <li key={item.label}>
+                <li key={item.label} className="text-left">
                   <a
                     href={item.href}
                     target="_blank"
@@ -104,7 +91,7 @@ export function Footer() {
                     className="hover:text-warm-white transition-colors duration-200 inline-flex items-center gap-1.5"
                   >
                     <span>{item.label}</span>
-                    <ArrowUpRight className="w-3 h-3 text-stone-custom" />
+                    <ArrowUpRight className="w-3.5 h-3.5 text-stone-custom" />
                   </a>
                 </li>
               ))}
@@ -112,11 +99,20 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar: Copyright on left, Pages / Legal links on right without title */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-custom">
           <div>{footer.copyright}</div>
-          <div className="flex items-center gap-4">
-            <span>{footer.contact.location}</span>
+
+          <div className="flex flex-wrap items-center gap-5 sm:gap-6">
+            {footer.pages.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="hover:text-warm-white transition-colors duration-200"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

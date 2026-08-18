@@ -27,7 +27,7 @@ export interface Testimonial {
 export interface ServiceGroup {
   title: string;
   audience: string;
-  description: string;
+  offers: string[];
 }
 
 export interface MethodDimension {
@@ -211,20 +211,35 @@ export const CONTENT = {
       {
         title: "Consulting & Facilitation",
         audience: "For companies and consulting partners navigating transformation.",
-        description:
-          "Creative and strategy workshop facilitation, leadership offsites, change communication design, team building, development and integration, stakeholder alignment.",
+        offers: [
+          "Problem finding-solving workshop",
+          "Strategy Workshop",
+          "Leadership Offsite",
+          "Change Communication",
+          "Team Development",
+        ],
       },
       {
-        title: "Brand & Experience Design",
-        audience: "For companies and founders building what people see, feel and remember.",
-        description:
-          "Brand identity, event design, spatial and interior design for brand-critical environments and websites.",
+        title: "Strategic Design & Creative Direction",
+        audience: "For executives and entrepreneurs building what people see, feel, value and remember.",
+        offers: [
+          "Brand Strategy",
+          "Creative Direction",
+          "Curated Event Design",
+          "Spatial Design",
+          "Website Design",
+        ],
       },
       {
         title: "Mentorship & Education",
         audience: "For individuals, companies and institutions investing in people.",
-        description:
-          "Executive mentoring, lectures and programmes in Creative Business Design, design thinking and creative strategy.",
+        offers: [
+          "Executive Mentoring",
+          "Keynote & Lecture",
+          "Creative Business Design",
+          "Design Thinking Training",
+          "Empathic Communication Training",
+        ],
       },
     ] as ServiceGroup[],
     individualServices: {
@@ -398,7 +413,7 @@ export const CONTENT = {
           "Event design and organisation for an employer award. Assembled the supplier network and scoped a multi-year collaboration with structured work packages.",
         outcome: "multi-year framework, venue and partner network secured",
         expertise: [
-          "Corporate Event Design & Organisation",
+          "Corporate Event Design",
           "Branding",
           "Web Design",
           "Strategic Partnership Building",
@@ -406,7 +421,7 @@ export const CONTENT = {
       },
     ] as CaseStudy[],
     footnote:
-      "We do not share detailed information about our partners in order to protect their privacy. Case studies and testimonials are communicated in a way that does not reveal confidential information. Upon request, we are glad to provide professional references.",
+      "We do not share detailed information about our partners in order to protect their privacy. Case studies and testimonials are communicated in a way that does not reveal confidential information.",
   },
 
   plan: {
@@ -415,19 +430,19 @@ export const CONTENT = {
       "Working with us takes three steps, and none of them requires you to change how you already work.",
     steps: [
       {
-        title: "Start a Conversation",
+        title: "Start a conversation",
         description:
           "We begin with a short call to understand where you are, what's at stake and what a good outcome looks like for you.",
       },
       {
-        title: "We Design the Path",
+        title: "You choose your path",
         description:
           "Together we shape the right approach, whether that's a single workshop, a brand engagement or an ongoing mentorship, matched to your goals and timeline.",
       },
       {
-        title: "We Build It Together",
+        title: "We build together",
         description:
-          "We move into delivery, staying close throughout, so the result isn't just handed over. It's lived.",
+          "We move into delivery, staying close throughout the process, so the result isn't just handed over. We co-create together.",
       },
     ] as PlanStep[],
     cta: bookCta("Conversation with HERR Design Collective"),
@@ -465,7 +480,8 @@ export const CONTENT = {
     social: [{ label: "LinkedIn", href: "#" /* TODO: LinkedIn URL */ }],
     contact: {
       email: "contact@herrdesigncollective.com",
-      location: "Zurich, Switzerland",
+      address: "Hadlaubstrasse 142, 8006 Zurich",
+      uid: "CHE-407.478.267",
     },
     copyright: "© 2026 HERR Design Collective GmbH",
   },

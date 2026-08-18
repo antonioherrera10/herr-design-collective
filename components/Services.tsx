@@ -3,6 +3,17 @@
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { CONTENT } from "@/lib/content";
+import { AbstractServiceGraphic } from "@/components/AbstractServiceGraphic";
+
+const GRAPHIC_TYPES = ["partnership", "people", "business"] as const;
+
+const PRISM_HUES = [
+  { bg: "rgba(193, 97, 112, 0.10)", border: "rgba(193, 97, 112, 0.28)", hoverBorder: "rgba(193, 97, 112, 0.55)", hoverBg: "rgba(193, 97, 112, 0.16)", text: "#F7E6E9", dot: "#C16170" }, // Rose
+  { bg: "rgba(169, 138, 196, 0.10)", border: "rgba(169, 138, 196, 0.28)", hoverBorder: "rgba(169, 138, 196, 0.55)", hoverBg: "rgba(169, 138, 196, 0.16)", text: "#F0EAF5", dot: "#A98AC4" }, // Lilac
+  { bg: "rgba(224, 187, 82, 0.10)", border: "rgba(224, 187, 82, 0.28)", hoverBorder: "rgba(224, 187, 82, 0.55)", hoverBg: "rgba(224, 187, 82, 0.16)", text: "#FAF4E1", dot: "#E0BB52" }, // Amber
+  { bg: "rgba(143, 182, 148, 0.10)", border: "rgba(143, 182, 148, 0.28)", hoverBorder: "rgba(143, 182, 148, 0.55)", hoverBg: "rgba(143, 182, 148, 0.16)", text: "#E9F3EB", dot: "#8FB694" }, // Sage
+  { bg: "rgba(123, 154, 196, 0.10)", border: "rgba(123, 154, 196, 0.28)", hoverBorder: "rgba(123, 154, 196, 0.55)", hoverBg: "rgba(123, 154, 196, 0.16)", text: "#E7EEF7", dot: "#7B9AC4" }, // Slate Blue
+];
 
 export function Services() {
   const { services } = CONTENT;
@@ -61,10 +72,31 @@ export function Services() {
                 {group.audience}
               </p>
 
-              {/* Description: DM Sans 300/400, 15-16px, warm-white 70%, relaxed */}
-              <p className="text-[15px] sm:text-[16px] font-light text-warm-white/70 leading-relaxed mt-auto">
-                {group.description}
-              </p>
+              {/* Offers Badges List: Cycling PRISM Hues with Soft Tint Fill & Border */}
+              <ul className="mt-auto pt-4 flex flex-wrap items-center gap-2 sm:gap-2.5">
+                {group.offers.map((offer, offerIdx) => {
+                  const hue = PRISM_HUES[offerIdx % PRISM_HUES.length];
+                  return (
+                    <li key={offer}>
+                      <span
+                        className="inline-flex items-center gap-1.5 text-[12px] sm:text-[13px] font-medium px-3.5 py-1.5 rounded-full border transition-all duration-200"
+                        style={{
+                          backgroundColor: hue.bg,
+                          borderColor: hue.border,
+                          color: hue.text,
+                        }}
+                      >
+                        <span
+                          className="w-1.5 h-1.5 rounded-full"
+                          style={{ backgroundColor: hue.dot }}
+                          aria-hidden="true"
+                        />
+                        <span>{offer}</span>
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
             </motion.div>
           ))}
         </div>
@@ -85,29 +117,35 @@ export function Services() {
               </h3>
             </motion.div>
 
-            {/* 3 Individual Service Cards */}
+            {/* 3 Individual Service Cards with Abstract Generative Glass Banners */}
             <div className="w-full grid grid-cols-1 min-[900px]:grid-cols-3 gap-6 sm:gap-8 items-stretch mb-12 sm:mb-14">
-              {services.individualServices.items.map((item, idx) => (
-                <motion.div
-                  key={item.title}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{
-                    duration: 0.55,
-                    delay: shouldReduceMotion ? 0 : idx * 0.08,
-                    ease: "easeOut",
-                  }}
-                  className="group h-full flex flex-col justify-start bg-surface-custom border border-warm-white/[0.08] hover:border-warm-white/20 rounded-[16px] p-8 sm:p-9 md:p-10 transition-all duration-200 hover:bg-warm-white/[0.02]"
-                >
-                  <h4 className="text-[19px] sm:text-[20px] md:text-[21px] font-medium text-warm-white tracking-tight mb-4">
-                    {item.title}
-                  </h4>
-                  <p className="text-[15px] sm:text-[16px] font-light text-warm-white/70 leading-relaxed">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
+              {services.individualServices.items.map((item, idx) => {
+                const graphicType = GRAPHIC_TYPES[idx % GRAPHIC_TYPES.length];
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                    whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{
+                      duration: 0.55,
+                      delay: shouldReduceMotion ? 0 : idx * 0.08,
+                      ease: "easeOut",
+                    }}
+                    className="group h-full flex flex-col justify-start bg-surface-custom border border-warm-white/[0.08] hover:border-warm-white/20 rounded-[16px] p-6 sm:p-7 md:p-8 transition-all duration-200 hover:bg-warm-white/[0.02]"
+                  >
+                    {/* Generative Abstract Glass Shape Banner */}
+                    <AbstractServiceGraphic type={graphicType} />
+
+                    <h4 className="text-[19px] sm:text-[20px] md:text-[21px] font-medium text-warm-white tracking-tight mb-3">
+                      {item.title}
+                    </h4>
+                    <p className="text-[15px] sm:text-[16px] font-light text-warm-white/70 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* CTA Button */}

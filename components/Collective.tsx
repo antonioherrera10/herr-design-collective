@@ -79,8 +79,25 @@ export function Collective() {
     <section
       id="collective"
       aria-labelledby="collective-heading"
-      className="w-full bg-ink py-24 sm:py-28 md:py-32 px-6 sm:px-8 border-t border-warm-white/[0.06] relative overflow-hidden"
+      className="w-full bg-ink py-24 sm:py-28 md:py-32 px-6 sm:px-8 relative overflow-hidden"
     >
+      {/* Top Full-Width Horizontal PRISM Colour Stripe with Smooth Draw-In */}
+      <div className="absolute top-0 left-0 right-0 h-[2.5px] w-full overflow-hidden pointer-events-none">
+        <motion.div
+          initial={shouldReduceMotion ? false : { scaleX: 0, opacity: 0 }}
+          whileInView={shouldReduceMotion ? undefined : { scaleX: 1, opacity: 1 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.85, ease: "easeOut" }}
+          style={{
+            transformOrigin: "left center",
+            background:
+              "linear-gradient(90deg, #C16170 0%, #A98AC4 25%, #E0BB52 50%, #8FB694 75%, #7B9AC4 100%)",
+          }}
+          aria-hidden="true"
+          className="w-full h-full"
+        />
+      </div>
+
       <div className="w-full max-w-6xl mx-auto flex flex-col gap-16 sm:gap-20">
         {/* Header Block */}
         <motion.div
@@ -88,19 +105,19 @@ export function Collective() {
           whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.65, ease: "easeOut" }}
-          className="flex flex-col items-start max-w-3xl"
+          className="flex flex-col items-center text-center max-w-3xl mx-auto"
         >
           {/* H2 Heading: clamp(30-44px), DM Sans 600, warm-white, sentence case */}
           <h2
             id="collective-heading"
-            className="text-[clamp(30px,3.5vw,44px)] font-semibold text-warm-white tracking-tight leading-[1.15] mb-4 sm:mb-5"
+            className="text-[clamp(30px,3.5vw,44px)] font-semibold text-warm-white tracking-tight leading-[1.15] mb-4 sm:mb-5 text-center"
           >
             {collective.heading}
           </h2>
 
           {/* Subline */}
           {collective.subline && (
-            <p className="text-[18px] sm:text-[20px] md:text-[22px] font-light text-warm-white/80 leading-relaxed max-w-[60ch]">
+            <p className="text-[18px] sm:text-[20px] md:text-[22px] font-light text-warm-white/80 leading-relaxed max-w-[60ch] text-center">
               {collective.subline}
             </p>
           )}
