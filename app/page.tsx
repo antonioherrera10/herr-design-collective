@@ -15,6 +15,7 @@ import { Plan } from "@/components/Plan";
 import { AboutHerr } from "@/components/AboutHerr";
 import { FinalCta } from "@/components/FinalCta";
 import { HumanArchitectureGraphic } from "@/components/HumanArchitectureGraphic";
+import { HeroScrollIndicator } from "@/components/HeroScrollIndicator";
 
 export default function HomePage() {
   const { hero } = CONTENT;
@@ -91,6 +92,9 @@ export default function HomePage() {
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
+
+          {/* Interactive Scroll Down Indicator */}
+          <HeroScrollIndicator />
         </div>
       </section>
 

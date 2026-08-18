@@ -55,6 +55,7 @@ export function TrustedBy() {
 
   return (
     <section
+      id="trusted-by"
       aria-label="Trusted by partners"
       className="w-full bg-ink py-14 sm:py-16 md:py-20 px-6 sm:px-8 border-t border-warm-white/5"
     >
