@@ -4,6 +4,44 @@ import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { CONTENT, Person } from "@/lib/content";
 
+const HERR_PALETTE = [
+  {
+    name: "rose",
+    hex: "#C16170",
+    glow: "rgba(193, 97, 112, 0.35)",
+    border: "rgba(193, 97, 112, 0.6)",
+    duotone: "rgba(193, 97, 112, 0.18)",
+  },
+  {
+    name: "lilac",
+    hex: "#A98AC4",
+    glow: "rgba(169, 138, 196, 0.35)",
+    border: "rgba(169, 138, 196, 0.6)",
+    duotone: "rgba(169, 138, 196, 0.18)",
+  },
+  {
+    name: "gold",
+    hex: "#E0BB52",
+    glow: "rgba(224, 187, 82, 0.35)",
+    border: "rgba(224, 187, 82, 0.6)",
+    duotone: "rgba(224, 187, 82, 0.18)",
+  },
+  {
+    name: "sage",
+    hex: "#8FB694",
+    glow: "rgba(143, 182, 148, 0.35)",
+    border: "rgba(143, 182, 148, 0.6)",
+    duotone: "rgba(143, 182, 148, 0.18)",
+  },
+  {
+    name: "slate",
+    hex: "#7B9AC4",
+    glow: "rgba(123, 154, 196, 0.35)",
+    border: "rgba(123, 154, 196, 0.6)",
+    duotone: "rgba(123, 154, 196, 0.18)",
+  },
+];
+
 function getInitials(name: string): string {
   const cleanName = name.replace(/^(Dr\.|Prof\.)\s+/i, "");
   const parts = cleanName.trim().split(/\s+/);
@@ -20,6 +58,7 @@ function PersonCard({
   index: number;
   shouldReduceMotion: boolean | null;
 }) {
+  const color = HERR_PALETTE[index % HERR_PALETTE.length];
   const imageUrl = person.portraitId
     ? `https://res.cloudinary.com/df6nnksd2/image/upload/f_auto,q_auto,w_600/${person.portraitId}`
     : null;
@@ -34,24 +73,51 @@ function PersonCard({
         delay: shouldReduceMotion ? 0 : (index % 5) * 0.06,
         ease: "easeOut",
       }}
-      className="group flex flex-col items-start w-full"
+      className="group flex flex-col items-start w-full cursor-pointer"
     >
-      {/* 4:5 Rounded-12px Container */}
-      <div className="w-full aspect-[4/5] rounded-[12px] overflow-hidden relative bg-surface-custom border border-warm-white/[0.08] shadow-md transition-all duration-300">
+      {/* 4:5 Rounded-12px Container with dynamic HERR color aura and border shift on hover */}
+      <div
+        className="w-full aspect-[4/5] rounded-[12px] overflow-hidden relative bg-surface-custom border border-warm-white/[0.08] shadow-md transition-all duration-300 group-hover:scale-[1.02]"
+        style={{
+          boxShadow: "none",
+        }}
+      >
+        {/* Dynamic colored glow effect on hover */}
+        <div
+          className="absolute inset-0 rounded-[12px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 border"
+          style={{
+            borderColor: color.border,
+            boxShadow: `0 0 20px ${color.glow}, inset 0 0 14px ${color.duotone}`,
+          }}
+        />
+
         {imageUrl ? (
-          <Image
-            src={imageUrl}
-            alt={person.name}
-            fill
-            sizes="(max-width: 640px) 45vw, (max-width: 900px) 30vw, 20vw"
-            loading="lazy"
-            referrerPolicy="no-referrer"
-            className="object-cover grayscale-[35%] group-hover:grayscale-0 group-hover:scale-[1.02] transition-all duration-[250ms] ease-out"
-          />
+          <>
+            <Image
+              src={imageUrl}
+              alt={person.name}
+              fill
+              sizes="(max-width: 640px) 45vw, (max-width: 900px) 30vw, 20vw"
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              className="object-cover grayscale-[35%] group-hover:grayscale-0 transition-all duration-300 ease-out"
+            />
+            {/* Subtle color wash overlay in person's assigned HERR color */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none mix-blend-color"
+              style={{
+                backgroundColor: color.hex,
+                opacity: 0,
+              }}
+            />
+          </>
         ) : (
           /* Fallback Initials Tile */
           <div className="w-full h-full flex flex-col items-center justify-center bg-surface-custom text-platinum/90 select-none">
-            <span className="text-xl font-medium tracking-widest">
+            <span
+              className="text-xl font-medium tracking-widest transition-colors duration-200"
+              style={{ color: color.hex }}
+            >
               {getInitials(person.name)}
             </span>
           </div>
@@ -59,7 +125,9 @@ function PersonCard({
       </div>
 
       {/* Name: DM Sans 500, 15-16px, warm-white */}
-      <h4 className="text-[15px] sm:text-[16px] font-medium text-warm-white mt-3 leading-snug group-hover:text-white transition-colors duration-200">
+      <h4
+        className="text-[15px] sm:text-[16px] font-medium text-warm-white mt-3 leading-snug transition-colors duration-200"
+      >
         {person.name}
       </h4>
 
@@ -127,10 +195,20 @@ export function Collective() {
         <div className="flex flex-col gap-14 sm:gap-16">
           {/* Group 1: Specialists */}
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-3 border-b border-warm-white/[0.08] pb-3">
-              <span className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.25em] text-stone-custom">
-                Specialists
+            <div className="flex flex-col gap-2.5 pb-2">
+              <span className="text-[12px] sm:text-[13px] font-bold uppercase tracking-[0.28em] text-warm-white">
+                SPECIALISTS
               </span>
+              {/* Interactive PRISM Spectrum Line underneath */}
+              <div className="w-full h-[2px] rounded-full overflow-hidden bg-warm-white/[0.06]">
+                <div
+                  className="w-full h-full opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #C16170 0%, #A98AC4 25%, #E0BB52 50%, #8FB694 75%, #7B9AC4 100%)",
+                  }}
+                />
+              </div>
             </div>
 
             {/* 5-column grid on desktop, 3 columns at ~900px, 2 columns below 640px */}
@@ -148,10 +226,20 @@ export function Collective() {
 
           {/* Group 2: Advisory Board */}
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-3 border-b border-warm-white/[0.08] pb-3">
-              <span className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.25em] text-stone-custom">
-                Advisory Board
+            <div className="flex flex-col gap-2.5 pb-2">
+              <span className="text-[12px] sm:text-[13px] font-bold uppercase tracking-[0.28em] text-warm-white">
+                ADVISORY BOARD
               </span>
+              {/* Interactive PRISM Spectrum Line underneath */}
+              <div className="w-full h-[2px] rounded-full overflow-hidden bg-warm-white/[0.06]">
+                <div
+                  className="w-full h-full opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #C16170 0%, #A98AC4 25%, #E0BB52 50%, #8FB694 75%, #7B9AC4 100%)",
+                  }}
+                />
+              </div>
             </div>
 
             {/* 5-column grid on desktop, 3 columns at ~900px, 2 columns below 640px */}
@@ -160,7 +248,7 @@ export function Collective() {
                 <PersonCard
                   key={person.name}
                   person={person}
-                  index={index}
+                  index={index + collective.specialists.length}
                   shouldReduceMotion={shouldReduceMotion}
                 />
               ))}
@@ -171,3 +259,4 @@ export function Collective() {
     </section>
   );
 }
+

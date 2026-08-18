@@ -132,12 +132,39 @@ export function Services() {
                       delay: shouldReduceMotion ? 0 : idx * 0.08,
                       ease: "easeOut",
                     }}
-                    className="group h-full flex flex-col justify-start bg-surface-custom border border-warm-white/[0.08] hover:border-warm-white/20 rounded-[16px] p-6 sm:p-7 md:p-8 transition-all duration-200 hover:bg-warm-white/[0.02]"
+                    className="group relative h-full flex flex-col justify-start bg-surface-custom border border-warm-white/[0.08] hover:border-warm-white/25 rounded-[16px] p-6 sm:p-7 md:p-8 pt-8 sm:pt-9 md:pt-10 transition-all duration-300 hover:bg-warm-white/[0.02] overflow-hidden"
                   >
+                    {/* Top Colorful Interactive PRISM Spectrum Accent Line on the Card */}
+                    <div className="absolute top-0 left-0 right-0 h-[3px] w-full overflow-hidden">
+                      <div
+                        className="w-full h-full opacity-80 group-hover:opacity-100 group-hover:h-[4px] transition-all duration-300 transform origin-left"
+                        style={{
+                          background:
+                            idx === 0
+                              ? "linear-gradient(90deg, #C16170 0%, #A98AC4 50%, #E0BB52 100%)"
+                              : idx === 1
+                              ? "linear-gradient(90deg, #A98AC4 0%, #E0BB52 50%, #8FB694 100%)"
+                              : "linear-gradient(90deg, #E0BB52 0%, #8FB694 50%, #7B9AC4 100%)",
+                        }}
+                      />
+                      {/* Subtle hover pulse light */}
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-[2px]"
+                        style={{
+                          background:
+                            idx === 0
+                              ? "linear-gradient(90deg, #C16170, #E0BB52)"
+                              : idx === 1
+                              ? "linear-gradient(90deg, #A98AC4, #8FB694)"
+                              : "linear-gradient(90deg, #E0BB52, #7B9AC4)",
+                        }}
+                      />
+                    </div>
+
                     {/* Generative Abstract Glass Shape Banner */}
                     <AbstractServiceGraphic type={graphicType} />
 
-                    <h4 className="text-[19px] sm:text-[20px] md:text-[21px] font-medium text-warm-white tracking-tight mb-3">
+                    <h4 className="text-[19px] sm:text-[20px] md:text-[21px] font-medium text-warm-white tracking-tight mb-3 group-hover:text-warm-white transition-colors">
                       {item.title}
                     </h4>
                     <p className="text-[15px] sm:text-[16px] font-light text-warm-white/70 leading-relaxed">

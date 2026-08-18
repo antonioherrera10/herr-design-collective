@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { CONTENT } from "@/lib/content";
+import { InteractiveSpectrumStripe } from "@/components/InteractiveSpectrumStripe";
 
 export function AboutHerr() {
   const { aboutHerr } = CONTENT;
@@ -21,22 +22,8 @@ export function AboutHerr() {
       aria-labelledby="about-headline"
       className="w-full bg-ink text-warm-white py-24 sm:py-28 md:py-32 px-6 sm:px-8 relative overflow-hidden"
     >
-      {/* Top Full-Width Horizontal PRISM Colour Stripe with Smooth Draw-In */}
-      <div className="absolute top-0 left-0 right-0 h-[2.5px] w-full overflow-hidden pointer-events-none">
-        <motion.div
-          initial={shouldReduceMotion ? false : { scaleX: 0, opacity: 0 }}
-          whileInView={shouldReduceMotion ? undefined : { scaleX: 1, opacity: 1 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.85, ease: "easeOut" }}
-          style={{
-            transformOrigin: "left center",
-            background:
-              "linear-gradient(90deg, #C16170 0%, #A98AC4 25%, #E0BB52 50%, #8FB694 75%, #7B9AC4 100%)",
-          }}
-          aria-hidden="true"
-          className="w-full h-full"
-        />
-      </div>
+      {/* Top Full-Width Horizontal PRISM Colour Stripe with Interactive Light & Draw-In */}
+      <InteractiveSpectrumStripe />
 
       <div className="w-full max-w-[68ch] mx-auto flex flex-col items-start">
         {/* Section Headline (H2, standard section display scale, left-aligned) */}

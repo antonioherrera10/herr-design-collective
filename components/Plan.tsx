@@ -44,7 +44,7 @@ export function Plan() {
           whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-col items-center text-center max-w-[55ch] mb-16 sm:mb-20 md:mb-24"
+          className="flex flex-col items-center text-center max-w-[55ch] mb-12 sm:mb-16"
         >
           <h2
             id="plan-headline"
@@ -57,25 +57,30 @@ export function Plan() {
           </p>
         </motion.div>
 
-        {/* The Three Steps: Guided interactive progress 1 -> 2 -> 3 with connecting line */}
+        {/* The Three Steps with Progress Bar on top of the cards */}
         <div className="w-full relative mb-16 sm:mb-20 md:mb-24">
-          {/* Desktop Horizontal Connector Line behind numerals with dynamic progress fill */}
-          <div
-            aria-hidden="true"
-            className="hidden min-[900px]:block absolute top-[28px] left-[15%] right-[15%] h-[2px] bg-warm-white/[0.08] z-0 overflow-hidden"
-          >
-            <motion.div
-              className="h-full bg-gradient-to-r from-[#C16170] via-[#E0BB52] to-[#8FB694]"
-              initial={false}
-              animate={{
-                width:
-                  activeStep === 0 ? "20%" : activeStep === 1 ? "60%" : "100%",
-              }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            />
+          {/* Progress Bar between text above and the cards */}
+          <div className="w-full max-w-4xl mx-auto mb-10 sm:mb-12 px-4 sm:px-6">
+            <div className="relative w-full h-[3px] rounded-full bg-warm-white/[0.08] overflow-hidden">
+              <motion.div
+                className="h-full rounded-full bg-gradient-to-r from-[#C16170] via-[#E0BB52] to-[#8FB694]"
+                initial={false}
+                animate={{
+                  width:
+                    activeStep === 0 ? "33.33%" : activeStep === 1 ? "66.66%" : "100%",
+                }}
+                transition={{ duration: 0.45, ease: "easeInOut" }}
+              />
+            </div>
+            {/* Step numbers preview indicators on top */}
+            <div className="flex justify-between items-center mt-2.5 px-1 text-[11px] font-medium tracking-[0.16em] uppercase text-warm-white/50">
+              <span className={activeStep >= 0 ? "text-[#C16170] font-semibold" : ""}>01 — Connect</span>
+              <span className={activeStep >= 1 ? "text-[#E0BB52] font-semibold" : ""}>02 — Shape</span>
+              <span className={activeStep >= 2 ? "text-[#8FB694] font-semibold" : ""}>03 — Create</span>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-10 min-[900px]:gap-8 relative z-10">
+          <div className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-8 min-[900px]:gap-8 relative z-10">
             {plan.steps.map((step, idx) => {
               const colors = STEP_COLORS[idx % STEP_COLORS.length];
               const isSelected = activeStep === idx;

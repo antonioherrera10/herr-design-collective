@@ -169,8 +169,8 @@ export const CONTENT = {
   testimonials: [
     {
       quote:
-        "Working with Antonio was inspiring once again. He creates the emotionally necessary, positive atmosphere, brings people together and guides them toward the shared goal. When people lose their way, he brings everyone back on track, connects individuals with their work and ensures that a group of strong individual thinkers works toward one goal so that, in a relatively short time, a result emerges that includes everyone's ideas, structured so clearly that a new concept takes shape. At the start of a workshop there are many ideas and fragments side by side, each still incomplete. By the end there is a concept that covers nearly every aspect and brings the relevant points together.",
-      attribution: "Investor, Zurich",
+        "Working with Antonio was inspiring once again. He creates the emotionally necessary, positive atmosphere, brings people together and guides them toward the shared goal. When people lose their way, he brings everyone back on track, connects individuals with their work and ensures that a group of strong individual thinkers works toward one goal so that, in a relatively short time, a result emerges that includes everyone's ideas, structured so clearly that a new concept takes shape.",
+      attribution: "UHNW Individual, Investor, Luxury Real Estate",
     },
     {
       quote:
@@ -190,7 +190,7 @@ export const CONTENT = {
     {
       quote:
         "What impressed me was how Antonio Herrera repeatedly manages, in a very short time, to turn specialists who have never worked together and come from very different fields into a team that pursues a shared goal and pushes each other to top performance.",
-      attribution: "Business Owner, Zurich",
+      attribution: "Entrepreneur, Technology & Real Estate",
     },
     {
       quote:

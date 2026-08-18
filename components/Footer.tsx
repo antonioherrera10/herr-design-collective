@@ -6,9 +6,9 @@ export function Footer() {
   const { footer } = CONTENT;
 
   return (
-    <footer className="w-full bg-surface-custom border-t border-warm-white/10 text-warm-white transition-colors">
+    <footer className="w-full bg-[#070707] border-t border-warm-white/[0.06] text-warm-white transition-colors">
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 pb-16 border-b border-warm-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 pb-16 border-b border-warm-white/[0.06]">
           {/* Brand Column */}
           <div className="lg:col-span-2 flex flex-col justify-start">
             <div>
@@ -20,7 +20,7 @@ export function Footer() {
                 <img
                   src="https://res.cloudinary.com/df6nnksd2/image/upload/v1787004496/HERR_Logo_Lang.svg"
                   alt="HERR Design Collective"
-                  className="h-5 sm:h-6 w-auto object-contain"
+                  className="h-4 sm:h-4.5 w-auto object-contain"
                 />
               </Link>
               <p className="text-sm text-platinum/70 max-w-sm leading-relaxed mb-4 font-light">

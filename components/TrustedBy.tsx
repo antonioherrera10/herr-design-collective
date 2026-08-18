@@ -56,11 +56,11 @@ export function TrustedBy() {
   return (
     <section
       aria-label="Trusted by partners"
-      className="w-full bg-ink py-16 sm:py-20 md:py-24 px-6 sm:px-8 border-t border-warm-white/5"
+      className="w-full bg-ink py-14 sm:py-16 md:py-20 px-6 sm:px-8 border-t border-warm-white/5"
     >
       <div className="w-full max-w-[1280px] mx-auto flex flex-col items-center text-center">
         {/* Mini-label */}
-        <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-stone-custom font-medium mb-10 sm:mb-12">
+        <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-stone-custom font-medium mb-8 sm:mb-10">
           {trustedBy.label}
         </span>
 
