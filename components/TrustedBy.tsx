@@ -8,11 +8,11 @@ function PartnerItem({ partner }: { partner: Partner }) {
   const scale = partner.scale ?? 1;
   const heightMobile = 20 * scale;
   const heightDesktop = 24 * scale;
-  
+
   // 2x pixel height for Cloudinary transformation
   const h2x = partner.logoId === "zhdk" ? 96 : Math.round(24 * 2 * scale);
-  const txPart = partner.tx ? `,${partner.tx}` : "";
-  const src = `https://res.cloudinary.com/df6nnksd2/image/upload/f_auto,q_auto${txPart},h_${h2x}/${partner.logoId}`;
+  const txSegment = partner.tx ? `${partner.tx}/` : "";
+  const src = `https://res.cloudinary.com/df6nnksd2/image/upload/f_auto,q_auto/${txSegment}h_${h2x}/${partner.logoId}`;
 
   if (hasError) {
     return (
@@ -38,9 +38,13 @@ function PartnerItem({ partner }: { partner: Partner }) {
         loading="lazy"
         onError={() => setHasError(true)}
         className="h-[var(--logo-h-mobile)] sm:h-[var(--logo-h-desktop)] w-auto object-contain opacity-50 hover:opacity-90 transition-opacity duration-300 select-none"
-        style={{
-          filter: "brightness(0) invert(1)",
-        }}
+        style={
+          partner.noFilter
+            ? undefined
+            : {
+                filter: "brightness(0) invert(1)",
+              }
+        }
       />
     </div>
   );

@@ -43,14 +43,17 @@ export function Nav() {
         }`}
       >
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
-          {/* Logo / Wordmark */}
+          {/* Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-3 text-warm-white tracking-[0.38em] uppercase text-xs sm:text-sm font-semibold transition-opacity hover:opacity-80 focus:outline-none"
+            className="group flex items-center transition-opacity hover:opacity-85 focus:outline-none"
             aria-label="HERR Design Collective Home"
           >
-            {/* SVG Logo swap target / Wordmark placeholder */}
-            <span className="whitespace-nowrap">HERR DESIGN COLLECTIVE</span>
+            <img
+              src="https://res.cloudinary.com/df6nnksd2/image/upload/v1787004496/HERR_Logo_Lang.svg"
+              alt="HERR Design Collective"
+              className="h-5 sm:h-6 md:h-6.5 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -110,9 +113,14 @@ export function Nav() {
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
-              className="text-warm-white tracking-[0.34em] uppercase text-xs font-semibold"
+              className="flex items-center"
+              aria-label="HERR Design Collective Home"
             >
-              HERR DESIGN COLLECTIVE
+              <img
+                src="https://res.cloudinary.com/df6nnksd2/image/upload/v1787004496/HERR_Logo_Lang.svg"
+                alt="HERR Design Collective"
+                className="h-5 sm:h-6 w-auto object-contain"
+              />
             </Link>
             <button
               type="button"

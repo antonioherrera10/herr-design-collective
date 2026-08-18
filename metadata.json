@@ -2,5 +2,5 @@
   "name": "HERR Design Collective",
   "description": "Zurich-based design consultancy working at the intersection of strategy, relationships and design. We make business transformation tangible.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

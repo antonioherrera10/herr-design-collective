@@ -32,3 +32,11 @@ body {
   background-color: #F2EFE9;
   color: #0E0D0C;
 }
+
+/* When custom spectrum cursor is active on fine pointer devices without reduced motion */
+html.custom-cursor-active,
+html.custom-cursor-active *,
+html.custom-cursor-active *::before,
+html.custom-cursor-active *::after {
+  cursor: none !important;
+}

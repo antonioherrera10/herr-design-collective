@@ -30,16 +30,22 @@ export interface ServiceGroup {
   description: string;
 }
 
+export interface MethodDimension {
+  name: string;
+  color: string;
+}
+
 export interface MethodStep {
   name: string;
   description: string;
   /** Only the PRISM step carries the five dimensions (spectrum bar markers). */
-  dimensions?: { name: string; colorToken: string }[];
+  dimensions?: readonly MethodDimension[];
 }
 
 export interface Person {
   name: string;
   role: string;
+  portraitId?: string;
 }
 
 export interface CaseStudy {
@@ -54,6 +60,7 @@ export interface Partner {
   logoId: string;
   tx?: string;
   scale?: number;
+  noFilter?: boolean;
 }
 
 export interface PlanStep {
@@ -72,7 +79,12 @@ export const CONTENT = {
   trustedBy: {
     label: "Trusted by partners from",
     partners: [
-      { name: "SWISS", logoId: "swiss" },
+      {
+        name: "SWISS",
+        logoId: "swiss",
+        tx: "e_replace_color:0E0D0C:20:FFFFFF/e_replace_color:F2EFE9:60:CC0000",
+        noFilter: true,
+      },
       { name: "SIX", logoId: "six" },
       { name: "CSL Behring", logoId: "csl-behring", tx: "e_make_transparent:20" },
       { name: "TEDxZurich", logoId: "tedxzurich" },
@@ -84,7 +96,7 @@ export const CONTENT = {
   },
 
   stakes: {
-    headline: "What happens when transformation stays on paper.",
+    headline: "What happens when transformation stays on paper?",
     body: "Most transformation efforts fail not because the strategy is wrong, but because no one designed the moments where people were meant to experience it. Without that, change becomes a memo nobody reads, a rebrand nobody believes, a workshop nobody remembers by Monday.",
   },
 
@@ -145,8 +157,9 @@ export const CONTENT = {
     body: "He partners with executives, entrepreneurs and high-profile individuals to create, raise and communicate value, transforming potential into felt, tangible results.",
     cta: {
       label: "Meet Antonio Herrera",
-      href: `${MAILTO}?subject=${encodeURIComponent("Meet Antonio Herrera")}`,
+      href: "mailto:antonio.herrera@herrdesigncollective.com?subject=Meet%20Antonio%20Herrera",
     } as Cta,
+    portraitId: "herr-antonio-herrera",
   },
 
   testimonials: [
@@ -236,11 +249,11 @@ export const CONTENT = {
         description:
           "Proprietary framework for aligning people and strategic direction across professional identity, relationships, work, spaces and leadership.",
         dimensions: [
-          { name: "Identity", colorToken: "identity" },
-          { name: "Relationships", colorToken: "relationships" },
-          { name: "Work", colorToken: "work" },
-          { name: "Spaces", colorToken: "spaces" },
-          { name: "Leadership", colorToken: "leadership" },
+          { name: "Identity", color: "#C16170" },
+          { name: "Relationships", color: "#A98AC4" },
+          { name: "Work", color: "#E0BB52" },
+          { name: "Spaces", color: "#8FB694" },
+          { name: "Leadership", color: "#7B9AC4" },
         ],
       },
       {
@@ -262,20 +275,59 @@ export const CONTENT = {
       "From HR and software development to art curation and architecture, we bring the right specialists into every engagement, collaborating and co-creating so your vision is built with real depth.",
       "HERR Design Collective is a Creative Business Design practice where strategy, relationships and design converge to move organisations, brands and people forward.",
     ],
-    cta: bookCta("Conversation with HERR Design Collective"),
     specialists: [
-      { name: "Egezon Kaloshi", role: "HR Business Partner, UK" },
-      { name: "Jenna Rinderknecht", role: "Designer, CH" },
-      { name: "Luis Pinto", role: "Software Developer, CL" },
-      { name: "Lara Sutter", role: "Art Curator, CH" },
-      { name: "Danilo Anchora", role: "Architect, CH" },
+      {
+        name: "Egezon Kaloshi",
+        role: "HR Business Partner, UK",
+        portraitId: "herr-egezon-kaloshi",
+      },
+      {
+        name: "Jenna Rinderknecht",
+        role: "Designer, CH",
+        portraitId: "herr-jenna-rinderknecht",
+      },
+      {
+        name: "Luis Pinto",
+        role: "Software Developer, CL",
+        portraitId: "herr-luis-pinto",
+      },
+      {
+        name: "Lara Sutter",
+        role: "Art Curator, CH",
+        portraitId: "herr-lara-sutter",
+      },
+      {
+        name: "Danilo Anchora",
+        role: "Architect, CH",
+        portraitId: "herr-danilo-anchora",
+      },
     ] as Person[],
     advisoryBoard: [
-      { name: "Dr. Caroline Whitfield", role: "International Entrepreneurship, UK" },
-      { name: "Stefan Kopp", role: "Finance, CH" },
-      { name: "Dr. Norbert Diaz de Arce", role: "Art & Music, DE" },
-      { name: "Angeles Torres", role: "Human Development, USA" },
-      { name: "Leopoldo Benitez", role: "Economics, VE" },
+      {
+        name: "Dr. Caroline Whitfield",
+        role: "International Entrepreneurship, UK",
+        portraitId: "herr-caroline-whitfield",
+      },
+      {
+        name: "Stefan Kopp",
+        role: "Finance, CH",
+        portraitId: "herr-stefan-kopp",
+      },
+      {
+        name: "Dr. Norbert Diaz de Arce",
+        role: "Art & Music, DE",
+        portraitId: "herr-norbert-diaz-de-arce",
+      },
+      {
+        name: "Angeles Torres",
+        role: "Human Development, USA",
+        portraitId: "herr-angeles-torres",
+      },
+      {
+        name: "Leopoldo Benitez",
+        role: "Economics, VE",
+        portraitId: "herr-leopoldo-benitez",
+      },
     ] as Person[],
   },
 
@@ -358,6 +410,7 @@ export const CONTENT = {
   },
 
   aboutHerr: {
+    headline: "About HERR Design Collective",
     paragraphs: [
       "HERR Design Collective is a Zurich-based design consultancy and Creative Business Design practice working at the intersection of strategy, relationships and design. Founded by Antonio Herrera, the collective supports executives, entrepreneurs and organisations who need business transformation to move beyond the strategy document and become something people actually experience and adopt.",
       "Unlike traditional management consultancies, which typically stop at the level of plans, frameworks and recommendations, HERR Design Collective focuses on the layer where transformation is felt: designed activities, workshops, leadership offsites, brand identity design, event design and the physical or digital spaces where change gets communicated and lived. The practice is built on a proprietary and renowned methodology. It begins with in-depth research and a Gallup CliftonStrengths assessment, understanding both the context and the people within it. From there it moves through the KOMPATH Method, rooted in empathy-led communication and work process design, and into the PRISM Method, a framework for aligning people, relationships and strategic direction. It continues through design thinking and co-creation and into strategic design execution.",

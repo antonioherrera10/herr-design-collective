@@ -60,8 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} scroll-smooth`}>
-      <body className="bg-ink text-warm-white font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-warm-white selection:text-ink">
+    <html lang="en" suppressHydrationWarning className={`${dmSans.variable} scroll-smooth`}>
+      <body suppressHydrationWarning className="bg-ink text-warm-white font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-warm-white selection:text-ink">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

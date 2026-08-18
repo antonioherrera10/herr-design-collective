@@ -1,6 +1,20 @@
 import { ArrowUpRight } from "lucide-react";
 import { CONTENT } from "@/lib/content";
 import { TrustedBy } from "@/components/TrustedBy";
+import { Stakes } from "@/components/Stakes";
+import { ProofStrip } from "@/components/ProofStrip";
+import { Empathy } from "@/components/Empathy";
+import { ValueProposition } from "@/components/ValueProposition";
+import { Guide } from "@/components/Guide";
+import { Testimonials } from "@/components/Testimonials";
+import { Services } from "@/components/Services";
+import { Method } from "@/components/Method";
+import { Collective } from "@/components/Collective";
+import { Cases } from "@/components/Cases";
+import { Plan } from "@/components/Plan";
+import { AboutHerr } from "@/components/AboutHerr";
+import { FinalCta } from "@/components/FinalCta";
+import { HumanArchitectureGraphic } from "@/components/HumanArchitectureGraphic";
 
 export default function HomePage() {
   const { hero } = CONTENT;
@@ -12,6 +26,9 @@ export default function HomePage() {
         id="hero"
         className="w-full min-h-[calc(100vh-80px)] flex flex-col justify-center items-center relative overflow-hidden px-6 sm:px-8 py-24 sm:py-32 md:py-40"
       >
+        {/* Human Architecture Vector Blueprint Graphic (Refined Atmospheric Layer) */}
+        <HumanArchitectureGraphic />
+
         {/* Subtle Ambient Radial Gradients */}
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
@@ -80,11 +97,44 @@ export default function HomePage() {
       {/* Trusted By Section */}
       <TrustedBy />
 
-      {/* Target Anchors for Navigation */}
-      <div id="method" className="scroll-mt-28" aria-hidden="true" />
-      <div id="services" className="scroll-mt-28" aria-hidden="true" />
-      <div id="cases" className="scroll-mt-28" aria-hidden="true" />
-      <div id="collective" className="scroll-mt-28" aria-hidden="true" />
+      {/* Stakes Section */}
+      <Stakes />
+
+      {/* Proof Strip Section */}
+      <ProofStrip />
+
+      {/* Empathy Section */}
+      <Empathy />
+
+      {/* Value Proposition Section */}
+      <ValueProposition />
+
+      {/* Guide Section */}
+      <Guide />
+
+      {/* Testimonials Section */}
+      <Testimonials />
+
+      {/* Services Section */}
+      <Services />
+
+      {/* Method Section */}
+      <Method />
+
+      {/* Collective Section */}
+      <Collective />
+
+      {/* Cases Section */}
+      <Cases />
+
+      {/* Plan Section */}
+      <Plan />
+
+      {/* About HERR Section */}
+      <AboutHerr />
+
+      {/* Final CTA Section */}
+      <FinalCta />
     </div>
   );
 }

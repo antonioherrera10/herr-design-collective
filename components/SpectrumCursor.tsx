@@ -4,27 +4,38 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
 export function SpectrumCursor() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [isVisible, setIsVisible] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  const [isTouchOrReducedMotion, setIsTouchOrReducedMotion] = useState(true);
+  const [isFinePointerActive, setIsFinePointerActive] = useState(false);
 
   useEffect(() => {
-    // Check for touch devices and reduced motion preference
-    const mediaQueryTouch = window.matchMedia("(pointer: coarse)");
+    setMounted(true);
+
+    // Check for fine pointer devices and no prefers-reduced-motion
+    const mediaQueryFine = window.matchMedia("(pointer: fine)");
     const mediaQueryReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     );
 
-    const checkDisabled = () => {
-      const isTouch = mediaQueryTouch.matches;
+    const updateCursorState = () => {
+      const isFine = mediaQueryFine.matches;
       const isReduced = mediaQueryReducedMotion.matches;
-      setIsTouchOrReducedMotion(isTouch || isReduced);
+      const active = isFine && !isReduced;
+
+      setIsFinePointerActive(active);
+
+      if (active) {
+        document.documentElement.classList.add("custom-cursor-active");
+      } else {
+        document.documentElement.classList.remove("custom-cursor-active");
+      }
     };
 
-    checkDisabled();
-    mediaQueryTouch.addEventListener("change", checkDisabled);
-    mediaQueryReducedMotion.addEventListener("change", checkDisabled);
+    updateCursorState();
+    mediaQueryFine.addEventListener("change", updateCursorState);
+    mediaQueryReducedMotion.addEventListener("change", updateCursorState);
 
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
@@ -41,8 +52,9 @@ export function SpectrumCursor() {
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      mediaQueryTouch.removeEventListener("change", checkDisabled);
-      mediaQueryReducedMotion.removeEventListener("change", checkDisabled);
+      document.documentElement.classList.remove("custom-cursor-active");
+      mediaQueryFine.removeEventListener("change", updateCursorState);
+      mediaQueryReducedMotion.removeEventListener("change", updateCursorState);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
@@ -50,7 +62,7 @@ export function SpectrumCursor() {
     };
   }, []);
 
-  if (isTouchOrReducedMotion || !isVisible) {
+  if (!mounted || !isFinePointerActive || !isVisible) {
     return null;
   }
 

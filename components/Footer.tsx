@@ -14,9 +14,14 @@ export function Footer() {
             <div>
               <Link
                 href="/"
-                className="inline-block text-warm-white tracking-[0.34em] uppercase text-sm font-semibold mb-4"
+                className="inline-block mb-4 transition-opacity hover:opacity-85"
+                aria-label="HERR Design Collective Home"
               >
-                HERR DESIGN COLLECTIVE
+                <img
+                  src="https://res.cloudinary.com/df6nnksd2/image/upload/v1787004496/HERR_Logo_Lang.svg"
+                  alt="HERR Design Collective"
+                  className="h-5 sm:h-6 w-auto object-contain"
+                />
               </Link>
               <p className="text-sm text-platinum/70 max-w-sm leading-relaxed mb-6 font-light">
                 Creative business design consultancy working at the intersection
