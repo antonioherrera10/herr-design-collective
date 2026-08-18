@@ -93,17 +93,17 @@ export function Collective() {
           {/* H2 Heading: clamp(30-44px), DM Sans 600, warm-white, sentence case */}
           <h2
             id="collective-heading"
-            className="text-[clamp(30px,3.5vw,44px)] font-semibold text-warm-white tracking-tight leading-[1.15] mb-6"
+            className="text-[clamp(30px,3.5vw,44px)] font-semibold text-warm-white tracking-tight leading-[1.15] mb-4 sm:mb-5"
           >
             {collective.heading}
           </h2>
 
-          {/* Body Paragraphs: DM Sans 300, 17-19px, warm-white 75%, max-w ~60ch */}
-          <div className="flex flex-col gap-4 text-[17px] sm:text-[18px] md:text-[19px] font-light text-warm-white/75 leading-relaxed max-w-[60ch]">
-            {collective.body.map((para, idx) => (
-              <p key={idx}>{para}</p>
-            ))}
-          </div>
+          {/* Subline */}
+          {collective.subline && (
+            <p className="text-[18px] sm:text-[20px] md:text-[22px] font-light text-warm-white/80 leading-relaxed max-w-[60ch]">
+              {collective.subline}
+            </p>
+          )}
         </motion.div>
 
         {/* People Groups Container */}

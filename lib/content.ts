@@ -298,10 +298,7 @@ export const CONTENT = {
 
   collective: {
     heading: "Collective empathy and expertise",
-    body: [
-      "From HR and software development to art curation and architecture, we bring the right specialists into every engagement, collaborating and co-creating so your vision is built with real depth.",
-      "HERR Design Collective is a Creative Business Design practice where strategy, relationships and design converge to move organisations, brands and people forward.",
-    ],
+    subline: "We curate teams, specialists and core members to serve you and your purpose.",
     specialists: [
       {
         name: "Egezon Kaloshi",
