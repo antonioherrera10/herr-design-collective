@@ -20,7 +20,7 @@ export function Footer() {
                 <img
                   src="https://res.cloudinary.com/df6nnksd2/image/upload/v1787004496/HERR_Logo_Lang.svg"
                   alt="HERR Design Collective"
-                  className="h-4 sm:h-4.5 w-auto object-contain"
+                  className="h-[18px] sm:h-5 w-auto object-contain"
                 />
               </Link>
               <p className="text-sm text-platinum/70 max-w-sm leading-relaxed mb-4 font-light">

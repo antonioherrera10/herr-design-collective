@@ -52,7 +52,7 @@ export function Nav() {
             <img
               src="https://res.cloudinary.com/df6nnksd2/image/upload/v1787004496/HERR_Logo_Lang.svg"
               alt="HERR Design Collective"
-              className="h-4 sm:h-4.5 md:h-5 w-auto object-contain"
+              className="h-[18px] sm:h-5 md:h-5 w-auto object-contain"
             />
           </Link>
 
@@ -119,7 +119,7 @@ export function Nav() {
               <img
                 src="https://res.cloudinary.com/df6nnksd2/image/upload/v1787004496/HERR_Logo_Lang.svg"
                 alt="HERR Design Collective"
-                className="h-4 sm:h-4.5 w-auto object-contain"
+                className="h-[18px] sm:h-5 w-auto object-contain"
               />
             </Link>
             <button

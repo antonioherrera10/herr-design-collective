@@ -8,17 +8,17 @@ export function HumanArchitectureGraphic() {
   return (
     <div
       aria-hidden="true"
-      className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center select-none"
+      className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none"
     >
       {/* Gentle Breathing Motion Container */}
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.98 }}
         animate={
           shouldReduceMotion
-            ? { opacity: 0.85, scale: 1 }
+            ? { opacity: 0.9, scale: 1 }
             : {
-                opacity: [0.75, 0.9, 0.75],
-                scale: [0.99, 1.01, 0.99],
+                opacity: [0.8, 0.95, 0.8],
+                scale: [0.995, 1.01, 0.995],
               }
         }
         transition={
@@ -29,13 +29,14 @@ export function HumanArchitectureGraphic() {
                 scale: { duration: 12, repeat: Infinity, ease: "easeInOut" },
               }
         }
-        className="w-full h-full max-w-[1600px] max-h-[1000px] relative flex items-center justify-center"
+        className="w-full h-full relative"
       >
         <svg
           viewBox="0 0 1440 900"
+          preserveAspectRatio="xMidYMid slice"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full object-cover opacity-80"
+          className="w-full h-full object-cover opacity-85"
         >
           <defs>
             {/* PRISM Atmospheric Diffusion Gradients */}
