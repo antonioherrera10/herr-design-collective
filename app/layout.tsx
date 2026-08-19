@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -61,6 +62,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${dmSans.variable} scroll-smooth`}>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-4MJB5LEFEN"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-4MJB5LEFEN');
+          `}
+        </Script>
+      </head>
       <body suppressHydrationWarning className="bg-ink text-warm-white font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-warm-white selection:text-ink">
         <script
           type="application/ld+json"
