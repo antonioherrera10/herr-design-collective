@@ -36,10 +36,8 @@ export function Nav() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          isScrolled
-            ? "bg-ink/90 backdrop-blur-md border-b border-warm-white/10 py-4"
-            : "bg-transparent py-6 md:py-8"
+        className={`sticky top-0 left-0 right-0 w-full bg-ink/95 backdrop-blur-md border-b border-warm-white/10 z-40 transition-all duration-200 ${
+          isScrolled ? "py-3.5 md:py-4 shadow-lg shadow-black/20" : "py-4.5 md:py-5"
         }`}
       >
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
