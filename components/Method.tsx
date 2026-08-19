@@ -114,6 +114,21 @@ function StepItem({
           {step.description}
         </p>
 
+        {/* Domain Badges (e.g. CliftonStrengths: Executing, Influencing, Relationship Building, Strategic Thinking) */}
+        {step.domains && step.domains.length > 0 && (
+          <ul className="mt-4 flex flex-wrap items-center gap-2 sm:gap-2.5">
+            {step.domains.map((domain) => (
+              <li
+                key={domain}
+                className="text-[11px] sm:text-[12px] uppercase tracking-[0.14em] font-medium text-warm-white/90 bg-warm-white/[0.04] hover:bg-warm-white/[0.08] hover:border-warm-white/25 transition-all duration-200 border border-warm-white/10 px-3 py-1 rounded-full inline-flex items-center gap-1.5"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-warm-white/50" aria-hidden="true" />
+                <span>{domain}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
         {/* Five Layers list if defined (e.g. KOMPATH Method) */}
         {step.layers && step.layers.length > 0 && (
           <ul className="mt-4 flex flex-wrap items-center gap-2 sm:gap-2.5">

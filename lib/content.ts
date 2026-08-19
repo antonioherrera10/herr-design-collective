@@ -39,6 +39,7 @@ export interface MethodStep {
   name: string;
   description: string;
   layers?: readonly string[];
+  domains?: readonly string[];
   /** Only the PRISM step carries the five dimensions (spectrum bar markers). */
   dimensions?: readonly MethodDimension[];
 }
@@ -279,6 +280,12 @@ export const CONTENT = {
         name: "Gallup CliftonStrengths.",
         description:
           "A psychometric assessment that identifies a person's natural patterns of thinking, feeling and behaving, used early to understand the people at the centre of the work.",
+        domains: [
+          "Executing",
+          "Influencing",
+          "Relationship Building",
+          "Strategic Thinking",
+        ],
       },
       {
         name: "KOMPATH Method.",
